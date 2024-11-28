@@ -60,6 +60,11 @@ async function sendMessage() {
     chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll to latest message
   }
   
+  // Initialize the chat on page load
+window.addEventListener("load", initializeChat);
+
+// Add event listeners to buttons
+document.getElementById("send-button").addEventListener("click", sendMessage);
 
   
 // document.getElementById("send-button").addEventListener("click", async function() {
