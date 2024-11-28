@@ -30,6 +30,8 @@ async function sendMessage() {
   // Send message to backend
   try {
       const threadId = sessionStorage.getItem("thread_id");
+      console.log(threadId)
+      console.log(userInput)
       const response = await fetch("https://us-central1-startupcloudvision.cloudfunctions.net/handle_request/newMessage", {
           method: "POST",
           headers: {
