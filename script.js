@@ -10,6 +10,8 @@ async function initializeChat() {
 
       const data = await response.json();
       sessionStorage.setItem("thread_id", data.thread_id); // Store thread_id for later use
+      console.log(sessionStorage['thread_id'])
+      console.log(data.message.content)
       displayMessage(data.message.content, "assistant");
   } catch (error) {
       console.error("Initialization Error:", error);
@@ -52,6 +54,7 @@ async function sendMessage() {
 
   // Function to display messages in the chat box
   function displayMessage(message, sender) {
+    console.log('creating message')
     const chatBox = document.getElementById("chat-box");
     const messageElement = document.createElement("div");
     messageElement.classList.add("message", sender);
