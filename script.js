@@ -1,30 +1,55 @@
-document.getElementById("send-button").addEventListener("click", async function() {
-    const userInput = document.getElementById("user-input").value;
-    if (userInput.trim() === "") return;
-  
-    // Display user message
-    displayMessage(userInput, "user");
-  
-    // Send message to backend via HTTPS
-    try {
-      const response = await fetch("https://YOUR_CLOUD_FUNCTION_URL", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ message: userInput })
+// Function to initialize the chat
+async function initializeChat() {
+  try {
+      const response = await fetch("https://us-central1-startupcloudvision.cloudfunctions.net/handle_request/newThread", {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json"
+          }
       });
-  
+
       const data = await response.json();
-      displayMessage(data.response, "assistant");
-    } catch (error) {
-      console.error("Error:", error);
+      sessionStorage.setItem("thread_id", data.thread_id); // Store thread_id for later use
+      displayMessage(data.message.content, "assistant");
+  } catch (error) {
+      console.error("Initialization Error:", error);
+      displayMessage("Sorry, something went wrong during initialization.", "assistant");
+  }
+}
+
+// Function to send user input
+async function sendMessage() {
+  const userInput = document.getElementById("user-input").value;
+  if (userInput.trim() === "") return;
+
+  // Display user message
+  displayMessage(userInput, "user");
+
+  // Send message to backend
+  try {
+      const threadId = sessionStorage.getItem("thread_id");
+      const response = await fetch("https://us-central1-startupcloudvision.cloudfunctions.net/handle_request/newMessage", {
+          method: "POST",
+          headers: {
+              "thread_id": threadId
+          },
+          body: JSON.stringify({
+              thread_id: threadId,
+              message: userInput
+          })
+      });
+
+      const data = await response.json();
+      displayMessage(data.message.content, "assistant");
+  } catch (error) {
+      console.error("Message Sending Error:", error);
       displayMessage("Sorry, something went wrong. Please try again later.", "assistant");
-    }
-  
-    document.getElementById("user-input").value = ""; // Clear input field
-  });
-  
+  }
+
+  document.getElementById("user-input").value = ""; // Clear input field
+}
+
+
   // Function to display messages in the chat box
   function displayMessage(message, sender) {
     const chatBox = document.getElementById("chat-box");
@@ -36,4 +61,31 @@ document.getElementById("send-button").addEventListener("click", async function(
   }
   
 
+  
+// document.getElementById("send-button").addEventListener("click", async function() {
+//     const userInput = document.getElementById("user-input").value;
+//     if (userInput.trim() === "") return;
+  
+//     // Display user message
+//     displayMessage(userInput, "user");
+  
+//     // Send message to backend via HTTPS
+//     try {
+//       const response = await fetch("https://YOUR_CLOUD_FUNCTION_URL", {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json"
+//         },
+//         body: JSON.stringify({ message: userInput })
+//       });
+  
+//       const data = await response.json();
+//       displayMessage(data.response, "assistant");
+//     } catch (error) {
+//       console.error("Error:", error);
+//       displayMessage("Sorry, something went wrong. Please try again later.", "assistant");
+//     }
+  
+//     document.getElementById("user-input").value = ""; // Clear input field
+//   });
   
