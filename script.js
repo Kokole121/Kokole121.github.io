@@ -25,6 +25,7 @@ async function sendMessage() {
   if (userInput.trim() === "") return;
 
   // Display user message
+  console.log("before creating messages");
   displayMessage(userInput, "user");
 
   console.log("started to send Message");
@@ -73,31 +74,4 @@ window.addEventListener("load", initializeChat);
 // Add event listeners to buttons
 document.getElementById("send-button").addEventListener("click", sendMessage);
 
-  
-// document.getElementById("send-button").addEventListener("click", async function() {
-//     const userInput = document.getElementById("user-input").value;
-//     if (userInput.trim() === "") return;
-  
-//     // Display user message
-//     displayMessage(userInput, "user");
-  
-//     // Send message to backend via HTTPS
-//     try {
-//       const response = await fetch("https://YOUR_CLOUD_FUNCTION_URL", {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify({ message: userInput })
-//       });
-  
-//       const data = await response.json();
-//       displayMessage(data.response, "assistant");
-//     } catch (error) {
-//       console.error("Error:", error);
-//       displayMessage("Sorry, something went wrong. Please try again later.", "assistant");
-//     }
-  
-//     document.getElementById("user-input").value = ""; // Clear input field
-//   });
   
