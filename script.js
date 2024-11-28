@@ -33,7 +33,7 @@ async function sendMessage() {
       const response = await fetch("https://us-central1-startupcloudvision.cloudfunctions.net/handle_request/newMessage", {
           method: "POST",
           headers: {
-              "thread_id": threadId
+              "Content-Type": "application/json"
           },
           body: JSON.stringify({
               thread_id: threadId,
