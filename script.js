@@ -27,6 +27,8 @@ async function sendMessage() {
   // Display user message
   displayMessage(userInput, "user");
 
+  console.log("started to send Message");
+
   // Send message to backend
   try {
       const threadId = sessionStorage.getItem("thread_id");
