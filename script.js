@@ -35,3 +35,5 @@ document.getElementById("send-button").addEventListener("click", async function(
     chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll to latest message
   }
   
+
+  
