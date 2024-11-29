@@ -83,6 +83,11 @@ async function sendMessage() {
       linkElement.rel = "noopener noreferrer"; // Security best practice
   
       messageElement.textContent = message.replace(markdownLinkRegex, ""); // Remove link placeholder
+      
+      // Remove the Markdown link and replace `\n` with <br>
+      const textBeforeLink = message.replace(markdownLinkRegex, "").replace(/\n/g, "<br>");
+      messageElement.innerHTML = textBeforeLink;
+
 
       // Add a line break
         messageElement.appendChild(document.createElement("br"));
@@ -90,7 +95,7 @@ async function sendMessage() {
       messageElement.appendChild(linkElement);
     } else {
       // No link detected, just set the text content
-      messageElement.textContent = message;
+      messageElement.innerHTML = message.replace(/\n/g, "<br>");
     }
   
     chatBox.appendChild(messageElement);
