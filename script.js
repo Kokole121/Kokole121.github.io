@@ -83,6 +83,10 @@ async function sendMessage() {
       linkElement.rel = "noopener noreferrer"; // Security best practice
   
       messageElement.textContent = message.replace(markdownLinkRegex, ""); // Remove link placeholder
+
+      // Add a line break
+        messageElement.appendChild(document.createElement("br"));
+
       messageElement.appendChild(linkElement);
     } else {
       // No link detected, just set the text content
