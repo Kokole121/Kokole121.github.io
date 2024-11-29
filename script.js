@@ -61,11 +61,34 @@ async function sendMessage() {
 
   // Function to display messages in the chat box
   function displayMessage(message, sender) {
-    console.log('creating message')
+    console.log('creating message');
+    
     const chatBox = document.getElementById("chat-box");
     const messageElement = document.createElement("div");
     messageElement.classList.add("message", sender);
-    messageElement.textContent = message;
+  
+    // Check for Markdown-style link and convert to HTML
+    const markdownLinkRegex = /\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/; // Matches [text](url)
+    const match = message.match(markdownLinkRegex);
+  
+    if (match) {
+      const linkText = match[1];
+      const linkUrl = match[2];
+  
+      // Create link element
+      const linkElement = document.createElement("a");
+      linkElement.href = linkUrl;
+      linkElement.textContent = linkText;
+      linkElement.target = "_blank"; // Open link in a new tab
+      linkElement.rel = "noopener noreferrer"; // Security best practice
+  
+      messageElement.textContent = message.replace(markdownLinkRegex, ""); // Remove link placeholder
+      messageElement.appendChild(linkElement);
+    } else {
+      // No link detected, just set the text content
+      messageElement.textContent = message;
+    }
+  
     chatBox.appendChild(messageElement);
     chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll to latest message
   }
