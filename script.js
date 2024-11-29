@@ -47,6 +47,7 @@ async function sendMessage() {
       });
 
       const data = await response.json();
+      console.log(data.message)
       displayMessage(data.message.content, "assistant");
   } catch (error) {
       console.error("Message Sending Error:", error);
