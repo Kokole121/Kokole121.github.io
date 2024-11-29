@@ -48,7 +48,7 @@ async function sendMessage() {
 
       const data = await response.json();
       console.log(data.message)
-      displayMessage("Sorry, something went wrong during initialization.", "assistant");
+      displayMessage(data.message, "assistant");
   } catch (error) {
       console.error("Message Sending Error:", error);
       displayMessage("Sorry, something went wrong. Please try again later.", "assistant");
