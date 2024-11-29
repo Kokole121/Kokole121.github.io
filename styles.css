@@ -34,8 +34,11 @@ body {
   }
   
   .chat-box .message.assistant {
-    background-color: #f7f7f7;
     text-align: left;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px 0;
   }
   
   input[type="text"] {
