@@ -10,8 +10,9 @@ async function initializeChat() {
 
       const data = await response.json();
       sessionStorage.setItem("thread_id", data.thread_id); // Store thread_id for later use
-      console.log(sessionStorage['thread_id'])
-      console.log(data.message.content)
+      console.log(data);
+      console.log(sessionStorage['thread_id']);
+      console.log(data.message.content);
       displayMessage(data.message.content, "assistant");
   } catch (error) {
       console.error("Initialization Error:", error);
@@ -47,8 +48,9 @@ async function sendMessage() {
       });
 
       const data = await response.json();
-      console.log(data.message)
-      console.log(typeof(data.message))
+      console.log(data);
+      console.log(data.message);
+      console.log(typeof(data.message));
       displayMessage(data.message, "assistant");
   } catch (error) {
       console.error("Message Sending Error:", error);
