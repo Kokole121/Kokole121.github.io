@@ -9,7 +9,7 @@ async function initializeChat() {
       });
 
       const data = await response.json();
-      sessionStorage.setItem("thread_id", data.thread_id); // Store thread_id for later use
+      sessionStorage.setItem("thread_id", data.threadId); // Store thread_id for later use
       console.log(data);
       console.log(data.threadId);
       console.log(sessionStorage['thread_id']);
