@@ -1,7 +1,7 @@
 // Function to initialize the chat
 async function initializeChat() {
   try {
-      const response = await fetch("https://us-central1-startupcloudvision.cloudfunctions.net/handle_request/newThread", {
+      const response = await fetch("https://us-central1-startupcloudvision.cloudfunctions.net/main/newThread", {
           method: "POST",
           headers: {
               "Content-Type": "application/json"
@@ -36,7 +36,7 @@ async function sendMessage() {
       const threadId = sessionStorage.getItem("thread_id");
       console.log(threadId)
       console.log(userInput)
-      const response = await fetch("https://us-central1-startupcloudvision.cloudfunctions.net/handle_request/newMessage", {
+      const response = await fetch("https://us-central1-startupcloudvision.cloudfunctions.net/main/newMessage", {
           method: "POST",
           headers: {
               "Content-Type": "application/json"
