@@ -42,10 +42,12 @@ async function sendMessage() {
           headers: {
               "Content-Type": "application/json"
           },
-          body: JSON.stringify({
-              thread_id: threadId,
-              message: userInput
-          })
+          body: JSON.stringify({thread_id: threadId, // Existing thread ID
+          message: {
+              content: userInput, // User's message content
+              additional: "", // Optional field, leave empty or populate as needed
+              messageType: "userInput" // Define the type of message
+          }})
       });
 
       const data = await response.json();
