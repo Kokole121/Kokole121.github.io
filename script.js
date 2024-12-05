@@ -42,7 +42,7 @@ async function sendMessage() {
           headers: {
               "Content-Type": "application/json"
           },
-          body: JSON.stringify({thread_id: threadId, // Existing thread ID
+          body: JSON.stringify({threadId: threadId, // Existing thread ID
           message: {
               content: userInput, // User's message content
               additional: "", // Optional field, leave empty or populate as needed
